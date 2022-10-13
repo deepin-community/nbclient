@@ -1,0 +1,3 @@
+Test-Command: env HOME=$AUTOPKGTEST_TMP python3 -m pytest /usr/lib/python3/dist-packages/nbclient
+Depends: python3-nbclient, python3-pytest, python3-ipykernel, python3-xmltodict, python3-nbconvert
+Restrictions: allow-stderr

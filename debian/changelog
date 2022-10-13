@@ -1,0 +1,52 @@
+nbclient (0.5.5-1) unstable; urgency=medium
+
+  * New upstream version 0.5.5
+  * Install jupyter-execute script
+  * Standards-Version: 4.6.0
+  * Skip two flaky tests
+
+ -- Gordon Ball <gordon@chronitis.net>  Tue, 09 Nov 2021 20:41:17 +0000
+
+nbclient (0.5.4-1) unstable; urgency=medium
+
+  * New upstream version 0.5.4
+
+ -- Gordon Ball <gordon@chronitis.net>  Sat, 21 Aug 2021 18:08:04 +0000
+
+nbclient (0.5.3-1) unstable; urgency=medium
+
+  [ Gordon Ball ]
+  * d/watch: new github tarball URL
+  * New upstream version 0.5.3
+
+  [ Julien Puydt ]
+  * Fix d/watch.
+
+ -- Gordon Ball <gordon@chronitis.net>  Sun, 15 Aug 2021 18:35:15 +0000
+
+nbclient (0.5.2-1) unstable; urgency=medium
+
+  * New upstream version 0.5.2
+
+ -- Gordon Ball <gordon@chronitis.net>  Tue, 09 Feb 2021 19:19:23 +0000
+
+nbclient (0.5.1-2) unstable; urgency=medium
+
+  * Source-only upload for testing migration
+
+ -- Gordon Ball <gordon@chronitis.net>  Sat, 24 Oct 2020 19:20:10 +0000
+
+nbclient (0.5.1-1) unstable; urgency=medium
+
+  * New upstream version 0.5.1.
+  * Mark the doc patch Debian-specific so lintian doesn't complain.
+  * Add myself as uploader.
+  * Add patch to avoid privacy breaches.
+
+ -- Julien Puydt <jpuydt@debian.org>  Sat, 17 Oct 2020 11:35:20 +0200
+
+nbclient (0.5.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #970718)
+
+ -- Gordon Ball <gordon@chronitis.net>  Tue, 22 Sep 2020 18:39:40 +0000

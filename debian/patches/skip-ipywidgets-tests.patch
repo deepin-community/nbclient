@@ -1,0 +1,41 @@
+From: Gordon Ball <gordon@chronitis.net>
+Date: Tue, 15 Sep 2020 12:31:43 +0000
+Subject: Patch flaky or unavailable tests
+
+* Don't test ipywidgets (up to date version not available)
+* Skip other notebook tests which appear to race
+* Extend timeouts for parallel tests
+---
+ nbclient/tests/test_client.py | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/nbclient/tests/test_client.py b/nbclient/tests/test_client.py
+index 6099f69..2abaa82 100644
+--- a/nbclient/tests/test_client.py
++++ b/nbclient/tests/test_client.py
+@@ -262,8 +262,6 @@ def filter_messages_on_error_output(err_output):
+             "Interrupt.ipynb",
+             dict(kernel_name="python", timeout=1, interrupt_on_timeout=True, allow_errors=True),
+         ),
+-        ("JupyterWidgets.ipynb", dict(kernel_name="python")),
+-        ("Skip Exceptions with Cell Tags.ipynb", dict(kernel_name="python")),
+         ("Skip Exceptions.ipynb", dict(kernel_name="python", allow_errors=True)),
+         ("Skip Execution with Cell Tag.ipynb", dict(kernel_name="python")),
+         ("SVG.ipynb", dict(kernel_name="python")),
+@@ -297,7 +295,7 @@ def test_parallel_notebooks(capfd, tmpdir):
+             for label in ("A", "B")
+         ]
+         [t.start() for t in threads]
+-        [t.join(timeout=2) for t in threads]
++        [t.join(timeout=20) for t in threads]
+ 
+     captured = capfd.readouterr()
+     assert filter_messages_on_error_output(captured.err) == ""
+@@ -710,6 +708,7 @@ while True: continue
+         executed = execute(original, os.path.dirname(filename))
+         assert_notebooks_equal(original, executed)
+ 
++    @pytest.mark.skip()
+     def test_widgets(self):
+         """Runs a test notebook with widgets and checks the widget state is saved."""
+         input_file = os.path.join(current_dir, 'files', 'JupyterWidgets.ipynb')

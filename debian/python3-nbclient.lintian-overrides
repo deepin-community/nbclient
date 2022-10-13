@@ -1,0 +1,2 @@
+# it's there for testing purposes
+python3-nbclient: image-file-in-usr-lib usr/lib/python3/dist-packages/nbclient/tests/files/python.png
