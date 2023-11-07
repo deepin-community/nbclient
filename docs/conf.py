@@ -17,6 +17,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
+import shutil
 import sys
 
 import nbclient
@@ -37,8 +38,16 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
+    # 'autodoc_traits',  # TODO
     'myst_parser',
 ]
+
+try:
+    import enchant  # type:ignore  # noqa
+
+    extensions += ["sphinxcontrib.spelling"]
+except ImportError:
+    pass
 
 autodoc_mock_imports = ['pytest', 'nbconvert', 'testpath']
 
@@ -55,7 +64,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'nbclient'
-copyright = '2020, Project Jupyter'
+copyright = '2020, Project Jupyter'  # noqa
 author = 'Project Jupyter'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -74,7 +83,7 @@ release = nbclient.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line foexitr these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -127,20 +136,20 @@ htmlhelp_basename = 'nclientdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
+# latex_elements = {
+# The paper size ('letterpaper' or 'a4paper').
+#
+# 'papersize': 'letterpaper',
+# The font size ('10pt', '11pt' or '12pt').
+#
+# 'pointsize': '10pt',
+# Additional stuff for the LaTeX preamble.
+#
+# 'preamble': '',
+# Latex figure (float) alignment
+#
+# 'figure_align': 'htbp',
+# }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
@@ -173,4 +182,17 @@ texinfo_documents = [
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {'python': ('https://docs.python.org/', None)}
+
+
+def setup(app):
+    here = os.path.abspath(os.path.dirname(__file__))
+    dest = os.path.join(here, 'changelog.md')
+    shutil.copy(os.path.join(here, '..', 'CHANGELOG.md'), dest)
+
+    autogen_config = os.path.join(here, "autogen_config.py")
+    prev_dir = os.getcwd()
+    os.chdir(here)
+    with open(autogen_config) as f:
+        exec(compile(f.read(), autogen_config, "exec"), {})  # noqa
+    os.chdir(prev_dir)

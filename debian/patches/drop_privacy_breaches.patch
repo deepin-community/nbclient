@@ -8,10 +8,8 @@ Forwarded: Debian-specific
  docs/index.rst | 17 +----------------
  1 file changed, 1 insertion(+), 16 deletions(-)
 
-diff --git a/docs/index.rst b/docs/index.rst
-index 4019c7c..494e078 100644
---- a/docs/index.rst
-+++ b/docs/index.rst
+--- nbclient.orig/docs/index.rst
++++ nbclient/docs/index.rst
 @@ -1,18 +1,6 @@
  Welcome to nbclient
  ===================
@@ -24,14 +22,14 @@ index 4019c7c..494e078 100644
 -   :target: https://github.com/jupyter/nbclient/actions
 -.. image:: https://codecov.io/github/jupyter/nbclient/coverage.svg?branch=master
 -   :alt: CodeCov
--   :target: https://codecov.io/github/jupyter/nbclient
+-   :target: https://codecov.io/gh/jupyter/nbclient
 -
 ----
 -
  **NBClient** lets you **execute** notebooks.
  
  A client library for programmatic notebook execution, **NBClient** is a tool for running Jupyter Notebooks in
-@@ -22,10 +10,7 @@ former ``ExecutePreprocessor``.
+@@ -22,10 +10,7 @@
  Demo
  ----
  

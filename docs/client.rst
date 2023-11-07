@@ -96,6 +96,39 @@ on both versions. Here the traitlet ``kernel_name`` helps simplify and
 maintain consistency: we can just run a notebook twice, specifying first
 "python2" and then "python3" as the kernel name.
 
+Hooks before and after notebook or cell execution
+-------------------------------------------------
+There are several configurable hooks that allow the user to execute code before and
+after a notebook or a cell is executed. Each one is configured with a function that will be called in its
+respective place in the execution pipeline.
+Each is described below:
+
+**Notebook-level hooks**: These hooks are called with a single extra parameter:
+
+- ``notebook=NotebookNode``: the current notebook being executed.
+
+Here is the available hooks:
+
+- ``on_notebook_start`` will run when the notebook client is initialized, before any execution has happened.
+- ``on_notebook_complete`` will run when the notebook client has finished executing, after kernel cleanup.
+- ``on_notebook_error`` will run when the notebook client has encountered an exception before kernel cleanup.
+
+**Cell-level hooks**: These hooks are called with at least two parameters:
+
+- ``cell=NotebookNode``: a reference to the current cell.
+- ``cell_index=int``: the index of the cell in the current notebook's list of cells.
+
+Here are the available hooks:
+
+- ``on_cell_start`` will run for all cell types before the cell is executed.
+- ``on_cell_execute`` will run right before the code cell is executed.
+- ``on_cell_complete`` will run after execution, if the cell is executed with no errors.
+- ``on_cell_executed`` will run right after the code cell is executed.
+- ``on_cell_error`` will run if there is an error during cell execution.
+
+``on_cell_executed`` and ``on_cell_error`` are called with an extra parameter ``execute_reply=dict``.
+
+
 Handling errors and exceptions
 ------------------------------
 
@@ -105,7 +138,7 @@ there are no execution errors. But, what if there are errors?
 Execution until first error
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 An error during the notebook execution, by default, will stop the execution
-and raise a ``CellExecutionError``. Conveniently, the source cell causing
+and raise a `CellExecutionError`. Conveniently, the source cell causing
 the error and the original error name and message are also printed.
 After an error, we can still save the notebook as before::
 
@@ -154,7 +187,7 @@ the state of all the widgets can be stored in the notebook's metadata.
 This allows rendering of the live widgets on for instance nbviewer, or when
 converting to html.
 
-We can tell nbclient to not store the state using the `store_widget_state`
+We can tell nbclient to not store the state using the ``store_widget_state``
 argument::
 
     client = NotebookClient(nb, store_widget_state=False)
@@ -173,7 +206,7 @@ Using a command-line interface
 
 This section will illustrate how to run notebooks from your terminal. It supports the most basic use case. For more sophisticated execution options, consider the `papermill <https://pypi.org/project/papermill/>`_ library.
 
-This library's command line tool is available by running `jupyter execute`. It expects notebooks as input arguments and accepts optional flags to modify the default behavior.
+This library's command line tool is available by running ``jupyter execute``. It expects notebooks as input arguments and accepts optional flags to modify the default behavior.
 
 Running a notebook is this easy.::
 
