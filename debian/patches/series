@@ -2,3 +2,4 @@ skip-ipywidgets-tests.patch
 documentation-fixes.patch
 drop_privacy_breaches.patch
 0004-Skip-flaky-tests.patch
+py313-deprecation.patch

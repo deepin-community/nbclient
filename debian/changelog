@@ -1,3 +1,10 @@
+nbclient (0.8.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Avoid a DeprecationWarning on Python 3.13+.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 25 Nov 2024 14:08:49 +0000
+
 nbclient (0.8.0-1) unstable; urgency=medium
 
   * Team upload.
